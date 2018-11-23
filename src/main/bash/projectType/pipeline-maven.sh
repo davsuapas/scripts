@@ -128,24 +128,16 @@ function retrieveStubRunnerIds() {
 # FUNCTION: runSmokeTests {{{
 # Given [APPLICATION_URL] and [STUBRUNNER_URL] will run the tests with [smoke] profile
 function runSmokeTests() {
-	echo "runSmokeTests 1"
 	local applicationUrl="${APPLICATION_URL}"
 	local stubrunnerUrl="${STUBRUNNER_URL}"
-	echo "runSmokeTests 2"
 	echo "Running smoke tests. Application url [${applicationUrl}], Stubrunner Url [${stubrunnerUrl}]"
-	echo "runSmokeTests 3"
 	if [[ "${CI}" == "CONCOURSE" ]]; then
-		echo "runSmokeTests 4"
 		# shellcheck disable=SC2086
 		"${MAVENW_BIN}" clean test -Psmoke -Dapplication.url="${applicationUrl}" -Dstubrunner.url="${stubrunnerUrl}" ${BUILD_OPTIONS} || (printTestResults && return 1)
-		echo "runSmokeTests 5"
 	else
-		echo "runSmokeTests 6"
 		# shellcheck disable=SC2086
 		"${MAVENW_BIN}" clean test -Psmoke -Dapplication.url="${applicationUrl}" -Dstubrunner.url="${stubrunnerUrl}" ${BUILD_OPTIONS}
-		echo "runSmokeTests 7"
 	fi
-	echo "runSmokeTests 8"
 } # }}}
 
 # FUNCTION: runE2eTests {{{

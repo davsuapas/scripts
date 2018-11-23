@@ -489,27 +489,19 @@ function prepareForSmokeTests() {
 	local appName
 	appName="$(retrieveAppName)"
 	mkdir -p "${OUTPUT_FOLDER}"
-	echo "prepareForSmokeTests 1"
 	logInToPaas
-	echo "prepareForSmokeTests 2"
 	local applicationPort
 	applicationPort="$(portFromKubernetes "${appName}")"
-	echo "prepareForSmokeTests 3"
 	local stubrunnerAppName
 	stubrunnerAppName="stubrunner-${appName}"
-	echo "prepareForSmokeTests 4"
 	local stubrunnerPort
 	stubrunnerPort="$(portFromKubernetes "${stubrunnerAppName}")"
-	echo "prepareForSmokeTests 5"
 	local applicationHost
 	applicationHost="$(applicationHost "${appName}")"
-	echo "prepareForSmokeTests 6"
 	local stubRunnerUrl
 	stubRunnerUrl="$(applicationHost "${stubrunnerAppName}")"
-	echo "prepareForSmokeTests 7"
 	export APPLICATION_URL="${applicationHost}:${applicationPort}"
 	export STUBRUNNER_URL="${stubRunnerUrl}:${stubrunnerPort}"
-	echo "prepareForSmokeTests 8"
 }
 
 function prepareForE2eTests() {
