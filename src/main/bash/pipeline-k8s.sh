@@ -485,7 +485,7 @@ function deployStubRunnerBoot() {
 }
 
 function prepareForSmokeTests() {
-	echo "Retrieving group and artifact id - it can take a while..."
+	echo "prepareForSmokeTests. Retrieving group and artifact id - it can take a while..."
 	local appName
 	appName="$(retrieveAppName)"
 	echo "-------------------> appName: ${appName}"
