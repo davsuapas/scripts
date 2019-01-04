@@ -488,28 +488,28 @@ function prepareForSmokeTests() {
 	echo "Retrieving group and artifact id - it can take a while..."
 	local appName
 	appName="$(retrieveAppName)"
-	echo "-------------------> appName: $(appName)"
+	echo "-------------------> appName: ${appName}"
 	mkdir -p "${OUTPUT_FOLDER}"
 	logInToPaas
 	local applicationPort
 	applicationPort="$(portFromKubernetes "${appName}")"
-	echo "-------------------> applicationPort: $(applicationPort)"
+	echo "-------------------> applicationPort: ${applicationPort}"
 	local stubrunnerAppName
 	stubrunnerAppName="stubrunner-${appName}"
-	echo "-------------------> stubrunnerAppName: $(stubrunnerAppName)"
+	echo "-------------------> stubrunnerAppName: ${stubrunnerAppName}"
 	local stubrunnerPort
 	stubrunnerPort="$(portFromKubernetes "${stubrunnerAppName}")"
-	echo "-------------------> stubrunnerPort: $(stubrunnerPort)"
+	echo "-------------------> stubrunnerPort: ${stubrunnerPort}"
 	local applicationHost
 	applicationHost="$(applicationHost "${appName}")"
-	echo "-------------------> applicationHost: $(applicationHost)"
+	echo "-------------------> applicationHost: ${applicationHost}"
 	local stubRunnerUrl
 	stubRunnerUrl="$(applicationHost "${stubrunnerAppName}")"
-	echo "-------------------> stubRunnerUrl: $(stubRunnerUrl)"
+	echo "-------------------> stubRunnerUrl: ${stubRunnerUrl}"
 	export APPLICATION_URL="${applicationHost}:${applicationPort}"
-	echo "-------------------> APPLICATION_URL: $(APPLICATION_URL)"
+	echo "-------------------> APPLICATION_URL: ${APPLICATION_URL}"
 	export STUBRUNNER_URL="${stubRunnerUrl}:${stubrunnerPort}"
-	echo "-------------------> STUBRUNNER_URL: $(STUBRUNNER_URL)"
+	echo "-------------------> STUBRUNNER_URL: ${STUBRUNNER_URL}"
 }
 
 function prepareForE2eTests() {
@@ -529,7 +529,7 @@ function applicationHost() {
 	local appName="${1}"
 	if [[ "${KUBERNETES_MINIKUBE}" == "true" ]]; then
 		local apiUrlProp="PAAS_${ENVIRONMENT}_API_URL"
-echo "-------------------> apiUrlProp: $(apiUrlProp)"		
+echo "-------------------> apiUrlProp: ${apiUrlProp}"		
 		# host:port -> host
 		echo "${!apiUrlProp}" | awk -F: '{print $1}'
 	else
