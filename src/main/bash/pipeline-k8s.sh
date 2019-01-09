@@ -446,6 +446,7 @@ function deployStubRunnerBoot() {
 	local rabbitName="${3}.${PAAS_NAMESPACE}"
 	local eurekaName="${4}.${PAAS_NAMESPACE}"
 	local stubRunnerName="${5:-stubrunner}"
+	echo "-------------------------stubRunnerUseClasspath>>>>>> ${stubRunnerUseClasspath}"
 	local stubRunnerUseClasspath="${stubRunnerUseClasspath:-false}"
 	echo "Deploying Stub Runner. Options - image name [${imageName}], app name [${stubRunnerName}]"
 	local stubrunnerIds
@@ -461,7 +462,9 @@ function deployStubRunnerBoot() {
 	cp "${originalServiceFile}" "${outputDirectory}"
 	local deploymentFile="${outputDirectory}/stubrunner.yml"
 	local serviceFile="${outputDirectory}/stubrunner-service.yml"
+	echo "-------------------------stubRunnerUseClasspath>>>>>> ${stubRunnerUseClasspath}"
 	if [[ "${stubRunnerUseClasspath}" == "false" ]]; then
+	echo "-------------------------entra>>>>>>"
 		systemProps="${systemProps} -Dstubrunner.repositoryRoot=${repoWithJars}"
 	fi
 	substituteVariables "appName" "${stubRunnerName}" "${deploymentFile}"
